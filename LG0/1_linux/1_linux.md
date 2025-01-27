@@ -71,11 +71,7 @@ PC在ssh连接开发机的过程中，开发机只会将特定的端口暴露在
 ssh -p 39998 root@ssh.intern-ai.org.cn -CNg -L {本地机器_PORT}:127.0.0.1:{开发机_PORT} -o StrictHostKeyChecking=no
 ```
 
-接下来我们尝试使用端口映射将运行在服务器上的gradio界面映射到本地。首先我们在开发机上运行gradio脚本。
-
-![alt text](./figures/image-12.png)
-
-首先在不进行端口映射的情况下我们运行脚本，发现可以接收到文本信息，这是因为vscode自动帮助我们进行了端口转发。
+接下来我们尝试使用端口映射将运行在服务器上的gradio界面映射到本地。首先我们在开发机上运行gradio脚本。先在不进行端口映射的情况下我们运行脚本，发现可以接收到文本信息，这是因为vscode自动帮助我们进行了端口转发。
 
 ![alt text](./figures/image-13.png)
 

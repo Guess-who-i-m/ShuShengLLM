@@ -5,25 +5,25 @@
 
 连接前首先需要在vscode中安装配置插件remote-ssh，随后创建开发机。完成开发机的创建后，在开发机界面可以看到ssh连接字样，点击ssh连接可以看到开发机对应的ssh登录命令和密码。
 
-![alt text](image.png)
+![alt text](./figures/image.png)
 
 随后来到vscode中，点击左侧边栏的remote-ssh插件，点击+号，添加一条ssh配置。
 
-![alt text](image-1.png)
+![alt text](./figures/image-1.png)
 
-![alt text](image-2.png)
+![alt text](./figures/image-2.png)
 
 随后我们可以借助vscode查看C盘中对应的配置文件，这里为了区分，我们修改ssh配置项的名称为ShuSheng-01。
 
-![alt text](image-3.png)
+![alt text](./figures/image-3.png)
 
 保存之后我们可以看到左侧边栏的内容也发生了改变。随后我们通过remote-ssh进行连接，并根据提示在顶栏输入密码。完成登陆后打开终端，发现已经进入了开发机的os中。
 
-![alt text](image-4.png)
+![alt text](./figures/image-4.png)
 
 之后我们可以通过linux指令查看开发机名称、内核信息、版本信息和GPU信息等
 
-![alt text](image-5.png)
+![alt text](./figures/image-5.png)
 
 ### 1.2 配置SSH密钥进行SSH远程连接
 
@@ -35,27 +35,27 @@
 ssh-keygen -t rsa       # -t 指定类型 rsa为加密算法
 ```
 通过指令我们可以生成密钥id_rsa，生成路径为/root/.ssh/id_rsa
-![alt text](image-6.png)
+![alt text](./figures/image-6.png)
 
 我们切换到对应目录下，发现可以找到两个文件，分别是id_rsa和id_rsa.pub。
 
-![alt text](image-7.png)
+![alt text](./figures/image-7.png)
 
 使用cat指令可以查看生成的密钥内容
 
-![alt text](image-8.png)
+![alt text](./figures/image-8.png)
 
 这里是生成的公钥的内容。随后根据指导书中的要求，我们需要将公钥复制粘贴到InternStudio的SSH公钥管理中。
 
-![alt text](image-9.png)
+![alt text](./figures/image-9.png)
 
 之后，我们还需要将私钥下载到本地并完成在本地的配置。这里需要完成两个步骤，首先需要修改ssh配置文件，增加IdentityFile字段，其值为私钥文件在本地的路径。
 
-![alt text](image-10.png)
+![alt text](./figures/image-10.png)
 
 之后我们需要在本地找到id_rsa文件，并且修改安全权限。我们需要确保私钥文件只能由用户控制，而不能是用户组。为了简单操作，我们直接禁用继承之后直接添加当前用户为文件控制者。
 
-![alt text](image-11.png)
+![alt text](./figures/image-11.png)
 
 之后我们关闭打开的vscode连接，重新进行ssh连接，发现不需要密码，可以直接完成连接。
 
@@ -73,15 +73,15 @@ ssh -p 39998 root@ssh.intern-ai.org.cn -CNg -L {本地机器_PORT}:127.0.0.1:{�
 
 接下来我们尝试使用端口映射将运行在服务器上的gradio界面映射到本地。首先我们在开发机上运行gradio脚本。
 
-![alt text](image-12.png)
+![alt text](./figures/image-12.png)
 
 首先在不进行端口映射的情况下我们运行脚本，发现可以接收到文本信息，这是因为vscode自动帮助我们进行了端口转发。
 
-![alt text](image-13.png)
+![alt text](./figures/image-13.png)
 
 随后我们关闭vscode的端口转发，在浏览器刷新界面，发现无法访问gradio界面。
 
-![alt text](image-15.png)
+![alt text](./figures/image-15.png)
 
 之后我们尝试端口映射，在本地机器powershell中运行下面的命令
 
@@ -89,7 +89,7 @@ ssh -p 39998 root@ssh.intern-ai.org.cn -CNg -L {本地机器_PORT}:127.0.0.1:{�
 ssh -p 39998 root@ssh.intern-ai.org.cn -CNg -L 7860:127.0.0.1:7860 -o StrictHostKeyChecking=no
 ```
 
-![alt text](image-16.png)
+![alt text](./figures/image-16.png)
 
 之后我们再次在浏览器刷新界面，发现又可以访问到gradio界面了。
 
@@ -99,33 +99,33 @@ ssh -p 39998 root@ssh.intern-ai.org.cn -CNg -L 7860:127.0.0.1:7860 -o StrictHost
 
 用touch可以创建文件
 
-![alt text](image-17.png)
+![alt text](./figures/image-17.png)
 
 ### 2.2 mkdir
 
 创建目录
 
-![alt text](image-18.png)
+![alt text](./figures/image-18.png)
 
 ### 2.3 cd
 
 切换目录
 
-![alt text](image-19.png)
+![alt text](./figures/image-19.png)
 
 ### 2.4 pwd
 
 查看当前所在目录
 
-![alt text](image-20.png)
+![alt text](./figures/image-20.png)
 
 ### 2.5 cat
 
 查看文件内容
 
-![alt text](image-21.png)
+![alt text](./figures/image-21.png)
 
-![alt text](image-22.png)
+![alt text](./figures/image-22.png)
 
 ### 2.6 cp和ln
 
@@ -139,15 +139,15 @@ cp命令用于实现复制
 ```bash
 ln [参数][源文件或目录][目标文件或目录]
 ```
-![alt text](image-26.png)
+![alt text](./figures/image-26.png)
 
-![alt text](image-24.png)
+![alt text](./figures/image-24.png)
 
 ### 2.7 mv和rm
 
 mv指令实现文件移动
 
-![alt text](image-23.png)
+![alt text](./figures/image-23.png)
 
 ```bash
 mv file1.txt dir1/      # 将文件file1.txt移动到dir1中
@@ -156,33 +156,33 @@ mv file1.txt file2.txt  # 将文件 file1.txt 重命名为 file2.txt
 
 rm指令用于删除文件
 
-![alt text](image-23.png)
+![alt text](./figures/image-23.png)
 
 ```bash
 rm file.txt     # 删除文件
 rm -r dir1/     # 递归删除目录
 ```
 
-![alt text](image-27.png)
+![alt text](./figures/image-27.png)
 
 ### 2.8 vi和vim
 
 用于实现文件编辑
 
-![alt text](image-28.png)
+![alt text](./figures/image-28.png)
 
 ### 2.9 find
 用来查找文件
 
-![alt text](image-29.png)
+![alt text](./figures/image-29.png)
 
-![alt text](image-30.png)
+![alt text](./figures/image-30.png)
 
 ### 2.10 ls
 
 查看目录内容
 
-![alt text](image-31.png)
+![alt text](./figures/image-31.png)
 
 ### 2.11 sed
 
@@ -200,7 +200,7 @@ sed用于文本处理
   - `p`：打印经过选择的行。通常与 `-n` 参数一起使用，只打印匹配的行。
   - `s`：使用正则表达式进行文本替换。例如，`s/old/new/g` 将所有 "InternLM" 替换为 "InternLM yyds"。
 
-![alt text](image-33.png)
+![alt text](./figures/image-33.png)
 
 ### 2.12 echo
 用于打印内容，结合管道符号>可以将内容打印到文件中
@@ -213,15 +213,15 @@ echo "InternLM" > file
 - ps 查看正在运行的进程
   - ps aux
   
-![alt text](image-34.png)
+![alt text](./figures/image-34.png)
 
 - top 动态显示正在运行的进程
 
-![alt text](image-35.png)
+![alt text](./figures/image-35.png)
 
 - pstree 树状查看正在运行的进程
 
-![alt text](image-36.png)
+![alt text](./figures/image-36.png)
 
 pstree指令无法直接从系统内找到，需要首先安装psmisc
 
@@ -231,7 +231,7 @@ apt install psmisc
 
 - pgrep 查找进程
 
-![alt text](image-37.png)
+![alt text](./figures/image-37.png)
 
 - nice 更改进程优先级
   - `nice -n 10 long-running-command` 
@@ -271,4 +271,4 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/m
 conda create -n 环境名称 python=指定python版本
 ```
 
-![alt text](image-38.png)
+![alt text](./figures/image-38.png)
